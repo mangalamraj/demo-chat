@@ -33,7 +33,9 @@ const ChatComponent = ({ activeMenu }: ChatComponentProps) => {
 
   useEffect(() => {
     const fetchDoctors = async () => {
-      const res = await fetch("http://localhost:8000/api/doctors");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors`,
+      );
       const data = await res.json();
       setDoctors(data);
       setSelectedDoctor(data[0]);
@@ -57,14 +59,17 @@ const ChatComponent = ({ activeMenu }: ChatComponentProps) => {
     setChatMessages((prev) => [...prev, userMessage]);
     setInput("");
 
-    const response = await fetch("http://localhost:8000/api/chat/stream", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        doctorId: selectedDoctor.id,
-        message: input,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/chat/stream`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          doctorId: selectedDoctor.id,
+          message: input,
+        }),
+      },
+    );
 
     const reader = response.body?.getReader();
     const decoder = new TextDecoder();
