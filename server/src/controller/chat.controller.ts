@@ -18,16 +18,29 @@ export const streamChat = async (req: Request, res: Response) => {
   res.setHeader("Connection", "keep-alive");
 
   try {
-    const { rows } = await query(`SELECT chats FROM doctors WHERE id = $1`, [
-      doctorId,
-    ]);
+    const { rows } = await query(
+      `SELECT specialization ,chats FROM doctors WHERE id = $1`,
+      [doctorId],
+    );
 
+    const specialization = rows[0]?.specialization;
     const previousChats = rows[0]?.chats || [];
+
+    const systemPrompt = {
+      role: "system",
+      content: `You are a highly experienced medical professional specializing in ${specialization}.
+    You should answer user questions clearly, accurately, and professionally, using terminology appropriate for a medical expert while still being understandable to patients when needed.Limit responses to the essential information only.Limit answers to at most 5 sentences. Give me summarized answer donot give me bullet points
+`,
+    };
 
     const stream = await client.chat.completions.create({
       model: "gpt-4o-mini",
       stream: true,
-      messages: [...previousChats, { role: "user", content: message }],
+      messages: [
+        systemPrompt,
+        ...previousChats,
+        { role: "user", content: message },
+      ],
     });
 
     let assistantMessage = "";
