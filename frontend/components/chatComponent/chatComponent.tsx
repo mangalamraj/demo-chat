@@ -105,7 +105,7 @@ const ChatComponent = ({ activeMenu }: ChatComponentProps) => {
           <div className=" w-[8%] 2xl:w-[24%]  xl:w-[24%] h-full p-1">
             <div
               onClick={() => setIsOpen((prev) => !prev)}
-              className="mt-2 flex xl:hidden  cursor-pointer items-center justify-center hover:opacity-75 "
+              className="mt-4 flex xl:hidden  cursor-pointer items-center justify-center hover:opacity-75 "
             >
               <PanelLeft size={18} strokeWidth={1.5} />
             </div>
@@ -265,7 +265,26 @@ const ChatComponent = ({ activeMenu }: ChatComponentProps) => {
                   ></input>
                   <button
                     onClick={sendMessage}
-                    className="rounded-full px-1.5 py-1.5 xl:p-2 flex justify-center items-center bg-linear-to-b from-5% to-90% from-[#013BDB] to-[#2C62F7]/90 cursor-pointer text-white border border-[#013BDB]/60 shadow-md inset-shadow-[#D2EAFF4D] shadow-[#01203C57] hover:opacity-95"
+                    className="
+                      relative
+                      rounded-full
+                      px-1.5 py-1.5 xl:p-2
+                      flex justify-center items-center
+                      cursor-pointer text-white
+
+                      bg-linear-to-b from-5% to-90%
+                      from-[#013BDB] to-[#2C62F7]/90
+
+                      border border-[#013BDB]/60
+                      shadow-md inset-shadow-[#D2EAFF4D] shadow-[#01203C57]
+                      hover:opacity-95
+
+                      before:absolute before:inset-0
+                      before:rounded-full
+                      before:pointer-events-none
+                      before:bg-[radial-gradient(circle,rgba(255,255,255,0.18)_0.5px,transparent_0.6px)]
+                      before:bg-[size:7px_7px]
+                    "
                   >
                     <ArrowUp size={20} strokeWidth={1.5} />
                   </button>

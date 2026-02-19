@@ -18,7 +18,7 @@ const Navbar = ({ active, setActive }: NavbarProps) => {
   const baseItem =
     "flex gap-2 items-center justify-center py-1 px-3 rounded-full cursor-pointer";
   const activeItem =
-    "bg-[linear-gradient(to_bottom,rgba(1,59,219,0.95),rgba(44,98,247,0.95)),url('/buttonbg.png')] text-white shadow-md/40 border border-[#2C62F7] px-8 py-2";
+    "bg-[linear-gradient(to_bottom,rgba(1,59,219,  relative bg-[linear-gradient(to_bottom,rgba(1,59,219,0.95),rgba(44,98,247,0.95))] text-white shadow-md/40 border border-[#2C62F7] px-8 py-2 before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle,rgba(255,255,255,0.10)_1px,transparent_1px)] before:bg-[size:8px_8px] before:pointer-events-none";
   const inactiveItem = "text-gray-500 hover:text-gray-700";
 
   return (
